@@ -13,6 +13,18 @@ class PhoneBook extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('listContacts'));
+    if (contacts && contacts.length) {
+      this.setState({ contacts });
+    }
+  }
+
+  componentDidUpdate() {
+    const { contacts } = this.state;
+    localStorage.setItem('listContacts', JSON.stringify(contacts));
+  }
+
   addContact = ({ number, name }) => {
     if (this.isDublicate(name)) {
       return alert(`${name} ${number} already on your contact list`);
