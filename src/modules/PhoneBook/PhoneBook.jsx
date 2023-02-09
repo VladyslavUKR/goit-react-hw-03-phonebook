@@ -17,12 +17,15 @@ class PhoneBook extends Component {
     const contacts = JSON.parse(localStorage.getItem('listContacts'));
     if (contacts && contacts.length) {
       this.setState({ contacts });
+      console.log(this.state);
     }
   }
 
-  componentDidUpdate() {
-    const { contacts } = this.state;
-    localStorage.setItem('listContacts', JSON.stringify(contacts));
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.length !== this.state) {
+      const { contacts } = this.state;
+      localStorage.setItem('listContacts', JSON.stringify(contacts));
+    }
   }
 
   addContact = ({ number, name }) => {
