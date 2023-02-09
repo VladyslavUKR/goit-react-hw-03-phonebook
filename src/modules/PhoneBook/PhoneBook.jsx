@@ -21,9 +21,9 @@ class PhoneBook extends Component {
     }
   }
 
-  componentDidUpdate(prevState) {
-    if (prevState.contacts.length !== this.state.contacts) {
-      const { contacts } = this.state;
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts.length !== contacts.length) {
       localStorage.setItem('listContacts', JSON.stringify(contacts));
     }
   }
